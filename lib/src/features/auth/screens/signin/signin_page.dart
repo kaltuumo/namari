@@ -92,7 +92,7 @@ class _SigninPageState extends State<SigninPage> {
                 Container(
                   width: double.infinity,
                   height: height * 0.055,
-                  padding: EdgeInsets.symmetric(horizontal: width * 0.04),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: AppColors.primaryColor.withOpacity(0.3),
@@ -107,7 +107,6 @@ class _SigninPageState extends State<SigninPage> {
 
                         icon:
                             const SizedBox(), // ⭐ removes dropdown icon completely
-
                         items:
                             [
                               {
@@ -122,15 +121,22 @@ class _SigninPageState extends State<SigninPage> {
                                 'name': 'Ethiopia',
                               },
                               {'code': '+20', 'flag': '🇪🇬', 'name': 'Egypt'},
-                            ].map((country) {
+                            ].map<DropdownMenuItem<String>>((country) {
                               return DropdownMenuItem<String>(
                                 value: country['code'],
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 6,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade200,
 
-                                child: Text(
-                                  "${country['flag']} ${country['code']}",
-                                  style: const TextStyle(
-                                    color: AppColors.grey,
-                                    fontSize: 16,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Text(
+                                    "${country['flag']} ${country['code']}",
+                                    style: const TextStyle(fontSize: 16),
                                   ),
                                 ),
                               );
@@ -154,7 +160,6 @@ class _SigninPageState extends State<SigninPage> {
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             hintText: "Phone Number",
-                            hintStyle: TextStyle(color: AppColors.grey),
                             border: InputBorder.none,
                             isDense: true,
                           ),
