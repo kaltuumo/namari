@@ -26,7 +26,7 @@ void showFlightBottomSheet(BuildContext context) {
 /// STATEFUL WIDGET
 /// =====================================================
 class _FlightBottomSheet extends StatefulWidget {
-  const _FlightBottomSheet({super.key});
+  const _FlightBottomSheet();
 
   @override
   State<_FlightBottomSheet> createState() => _FlightBottomSheetState();

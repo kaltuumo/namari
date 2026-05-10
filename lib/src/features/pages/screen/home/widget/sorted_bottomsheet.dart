@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:namari/src/features/pages/screen/home/widget/search_flight_page.dart';
 import 'package:namari/src/shared/app_button.dart';
 import 'package:namari/src/utils/constant/colors.dart';
 
 void showSortedBottomSheet(BuildContext context) {
-  int selectedIndex = 0;
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
