@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:namari/src/features/auth/screens/personalinformation/widget/continue_bottomsheet.dart';
 import 'package:namari/src/features/pages/screen/home/home_page.dart';
 import 'package:namari/src/shared/app_button.dart';

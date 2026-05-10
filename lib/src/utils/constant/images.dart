@@ -10,4 +10,5 @@ class AppImages {
   static const String girl = 'assets/images/young_girl.png';
   static const String success = 'assets/images/Success_Container.png';
   static const String currentimage = 'assets/images/current_image.png';
+  static const String maandeeq = 'assets/images/maandeeq.png';
 }

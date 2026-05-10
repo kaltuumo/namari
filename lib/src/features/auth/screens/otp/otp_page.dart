@@ -148,10 +148,9 @@ class _OtpPageState extends State<OtpPage> {
               SizedBox(height: height * 0.06),
 
               // Verify Button
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: width * 0.03),
+              SizedBox(
                 width: double.infinity,
-                height: height * 0.06,
+                height: 50,
                 child: AppButton(
                   text: "Verify",
                   onPressed: () {

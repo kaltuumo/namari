@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:namari/src/app_navigator.dart';
-import 'package:namari/src/features/pages/screen/home/widget/departure_bottomsheet.dart';
 import 'package:namari/src/features/pages/screen/home/widget/flight_page.dart';
 import 'package:namari/src/shared/app_button.dart';
 import 'package:namari/src/utils/constant/images.dart';

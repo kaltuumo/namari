@@ -2,9 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:namari/src/features/pages/screen/home/search_flight_page.dart';
+import 'package:namari/src/features/pages/screen/home/widget/departure_date_bottonsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/search_flight_page.dart';
 import 'package:namari/src/features/pages/screen/home/widget/departure_bottomsheet.dart';
-import 'package:namari/src/shared/app_button.dart';
 import 'package:namari/src/utils/constant/colors.dart';
 import 'package:namari/src/utils/constant/images.dart';
 
@@ -188,19 +188,26 @@ class _FlightBottomSheetState extends State<_FlightBottomSheet> {
             onTap: () {
               showDepartureBottomSheet(context);
             },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
               child: Row(
                 children: [
-                  Icon(Icons.flight_land, color: Colors.grey),
-                  SizedBox(width: 12),
-                  Expanded(
+                  const Icon(Icons.flight_land, color: Colors.grey),
+                  const SizedBox(width: 12),
+                  const Expanded(
                     child: Text(
                       "Where are you going?",
                       style: TextStyle(fontSize: 16, color: AppColors.grey),
                     ),
                   ),
-                  Icon(Icons.sync_alt),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(1300),
+                    ),
+                    child: const Icon(Icons.sync_alt, color: Colors.black),
+                  ),
                 ],
               ),
             ),
@@ -210,41 +217,57 @@ class _FlightBottomSheetState extends State<_FlightBottomSheet> {
     );
   }
 
-  // ================= DATE (FIXED + FORMATTED) =================
   Widget _buildDateSection() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.calendar_month, color: Colors.grey),
-          const SizedBox(width: 12),
+    return GestureDetector(
+      onTap: () async {
+        final result = await showModalBottomSheet<DateTime>(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          builder: (context) => const CustomDepartureSheet(),
+        );
 
-          Expanded(
-            child: Text(
-              isToday
-                  ? "Today (${formatDate(DateTime.now())})"
-                  : selectedDate != null
-                  ? formatDate(selectedDate!)
-                  : "Departure date",
-              style: const TextStyle(color: AppColors.grey, fontSize: 16),
+        if (result != null) {
+          setState(() {
+            selectedDate = result;
+            isToday = false;
+          });
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.calendar_month, color: Colors.grey),
+            const SizedBox(width: 12),
+
+            Expanded(
+              child: Text(
+                isToday
+                    ? "Today (${formatDate(DateTime.now())})"
+                    : selectedDate != null
+                    ? formatDate(selectedDate!)
+                    : "Departure date",
+                style: const TextStyle(color: Colors.grey, fontSize: 16),
+              ),
             ),
-          ),
 
-          Switch(
-            value: isToday,
-            activeColor: Colors.green,
-            onChanged: (v) {
-              setState(() {
-                isToday = v;
-                selectedDate = v ? DateTime.now() : null;
-              });
-            },
-          ),
-        ],
+            Switch(
+              value: isToday,
+              activeColor: Colors.green,
+              onChanged: (v) {
+                setState(() {
+                  isToday = v;
+                  selectedDate = v ? DateTime.now() : null;
+                });
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -267,6 +290,7 @@ class _FlightBottomSheetState extends State<_FlightBottomSheet> {
               style: TextStyle(color: AppColors.grey),
             ),
           ),
+          Icon(Icons.keyboard_arrow_down, color: Colors.grey),
         ],
       ),
     );
@@ -290,6 +314,7 @@ class _FlightBottomSheetState extends State<_FlightBottomSheet> {
               style: TextStyle(color: AppColors.grey),
             ),
           ),
+          Icon(Icons.keyboard_arrow_down, color: Colors.grey),
         ],
       ),
     );
@@ -298,17 +323,33 @@ class _FlightBottomSheetState extends State<_FlightBottomSheet> {
   // ================= BUTTON =================
   Widget _buildSearchButton() {
     final height = MediaQuery.of(context).size.height;
+
     return SizedBox(
       width: double.infinity,
-      height: height * 0.055,
-      child: AppButton(
-        text: "Search Flight",
+      height: height * 0.06,
+      child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primaryColor,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+        ),
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const SearchFlightPage()),
           );
         },
+        icon: const Icon(Icons.search, color: Colors.white, size: 22),
+        label: const Text(
+          "Search Flight",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }
