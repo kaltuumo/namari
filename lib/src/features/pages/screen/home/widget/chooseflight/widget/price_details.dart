@@ -261,32 +261,6 @@ class PriceDetails extends StatelessWidget {
   }
 }
 
-class _TabItem extends StatelessWidget {
-  final String title;
-  final bool isActive;
-  const _TabItem({required this.title, required this.isActive});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            color: isActive ? const Color(0xFF00C853) : Colors.grey,
-            fontSize: 13,
-            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-          ),
-        ),
-        const SizedBox(height: 4),
-        if (isActive)
-          Container(height: 2, width: 60, color: const Color(0xFF00C853)),
-      ],
-    );
-  }
-}
-
 class _DashedDivider extends StatelessWidget {
   const _DashedDivider();
   @override
