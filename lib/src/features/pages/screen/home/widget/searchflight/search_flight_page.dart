@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:namari/src/features/pages/screen/home/widget/sorted_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/chooseflight/choose_flight_page.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/filter_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/sorted_bottomsheet.dart';
 import 'package:namari/src/shared/app_button.dart';
 import 'package:namari/src/utils/constant/colors.dart';
 import 'package:namari/src/utils/constant/images.dart';
@@ -167,6 +169,9 @@ class SearchFlightPage extends StatelessWidget {
                             child: _filterButton(
                               icon: Icons.filter_alt_outlined,
                               title: "Filter",
+                              onTap: () {
+                                showFilterBottomSheet(context);
+                              },
                             ),
                           ),
 
@@ -465,7 +470,15 @@ class SearchFlightPage extends StatelessWidget {
                                 height: 50,
                                 child: AppButton(
                                   text: "Choose Flight",
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ChooseFlightPage(),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ],

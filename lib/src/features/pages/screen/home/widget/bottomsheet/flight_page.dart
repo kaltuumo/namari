@@ -2,9 +2,11 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:namari/src/features/pages/screen/home/widget/departure_date_bottonsheet.dart';
-import 'package:namari/src/features/pages/screen/home/widget/search_flight_page.dart';
-import 'package:namari/src/features/pages/screen/home/widget/departure_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/adult_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/departure_date_bottonsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/searchflight/search_flight_page.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/departure_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/select_class_bottomsheet.dart';
 import 'package:namari/src/utils/constant/colors.dart';
 import 'package:namari/src/utils/constant/images.dart';
 
@@ -79,9 +81,9 @@ class _FlightBottomSheetState extends State<_FlightBottomSheet> {
                           const SizedBox(height: 16),
                           _buildDateSection(),
                           const SizedBox(height: 16),
-                          _buildPassengerSection(),
+                          _buildPassengerSection(context),
                           const SizedBox(height: 16),
-                          _buildClassSection(),
+                          _buildClassSection(context),
                           const SizedBox(height: 24),
                           _buildSearchButton(),
                         ],
@@ -273,49 +275,56 @@ class _FlightBottomSheetState extends State<_FlightBottomSheet> {
   }
 
   // ================= PASSENGER =================
-  Widget _buildPassengerSection() {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: const Row(
-        children: [
-          Icon(Icons.people_outline, color: Colors.grey),
-          SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              "1 Adult, 0 child",
-              style: TextStyle(color: AppColors.grey),
+  Widget _buildPassengerSection(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        showPassengerBottomSheet(context);
+      },
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: const Row(
+          children: [
+            Icon(Icons.people_outline, color: Colors.grey),
+            SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                "1 Adult, 0 child",
+                style: TextStyle(color: AppColors.grey),
+              ),
             ),
-          ),
-          Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-        ],
+            Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+          ],
+        ),
       ),
     );
   }
 
   // ================= CLASS =================
-  Widget _buildClassSection() {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: const Row(
-        children: [
-          Icon(Icons.airline_seat_recline_normal, color: Colors.grey),
-          SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              "Select class",
-              style: TextStyle(color: AppColors.grey),
+  Widget _buildClassSection(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        showSelectClassBottomSheet(context);
+      },
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          children: const [
+            Icon(Icons.airline_seat_recline_normal, color: Colors.grey),
+            SizedBox(width: 12),
+            Expanded(
+              child: Text("Select class", style: TextStyle(color: Colors.grey)),
             ),
-          ),
-          Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-        ],
+            Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+          ],
+        ),
       ),
     );
   }

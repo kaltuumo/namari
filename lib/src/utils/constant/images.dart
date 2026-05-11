@@ -8,7 +8,9 @@ class AppImages {
   static const String maincontent = 'assets/images/Main_Content.png';
   static const String logo = 'assets/images/logo.png';
   static const String girl = 'assets/images/young_girl.png';
-  static const String success = 'assets/images/Success_Container.png';
+  static const String success = 'assets/images/Succes_ Icon.png';
   static const String currentimage = 'assets/images/current_image.png';
   static const String maandeeq = 'assets/images/maandeeq.png';
+  static const String rescheduleImage = 'assets/images/Reschedule_Image.png';
+  static const String helpIcon = 'assets/images/Help_Icon.png';
 }

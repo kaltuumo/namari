@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:namari/src/app_navigator.dart';
-import 'package:namari/src/features/pages/screen/home/widget/flight_page.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/flight_page.dart';
 import 'package:namari/src/shared/app_button.dart';
 import 'package:namari/src/utils/constant/images.dart';
 
@@ -32,6 +32,11 @@ class _CurrentLocationPageState extends State<CurrentLocationPage> {
                 children: [
                   SizedBox(height: height * 0.3),
                   Image.asset(AppImages.currentimage),
+                  SizedBox(height: height * 0.03),
+                  Text(
+                    "Find nearest airport",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
 
@@ -42,7 +47,7 @@ class _CurrentLocationPageState extends State<CurrentLocationPage> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    showFlightBottomSheet(context);
+                    // showFlightBottomSheet(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(

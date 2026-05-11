@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:namari/src/features/pages/screen/home/widget/current_location_page.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/current_location_page.dart';
 
 void showDepartureBottomSheet(BuildContext context) {
   showModalBottomSheet(

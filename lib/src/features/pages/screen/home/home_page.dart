@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:namari/src/features/pages/screen/home/widget/flight_page.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/flight_page.dart';
 import 'package:namari/src/utils/constant/images.dart';
 
 class HomePage extends StatelessWidget {

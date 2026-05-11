@@ -32,6 +32,15 @@ class _SuccessPageState extends State<SuccessPage> {
                 children: [
                   SizedBox(height: height * 0.3),
                   Image.asset(AppImages.success),
+                  SizedBox(height: height * 0.03),
+                  Text(
+                    "Successfully Created",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "Now explore vacation tickets and \n expreience how enjoyable it is ",
+                    style: TextStyle(fontSize: 14, color: AppColors.grey),
+                  ),
                 ],
               ),
 
