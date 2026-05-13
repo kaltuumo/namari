@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:namari/src/features/pages/screen/home/home_page.dart';
-import 'package:namari/src/features/pages/screen/orders/orders_page.dart';
-import 'package:namari/src/features/pages/screen/profile/profile_page.dart';
-import 'package:namari/src/features/pages/screen/rewards/rewards_page.dart';
-import 'package:namari/src/features/pages/screen/spotlight/spotlight_page.dart';
 import 'package:namari/src/utils/constant/colors.dart';
 
 class AppNavigator extends StatelessWidget {
@@ -29,7 +25,7 @@ class AppNavigator extends StatelessWidget {
             labelTextStyle: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.selected)) {
                 return TextStyle(
-                  color: AppColors.secondaryColor,
+                  color: AppColors.primaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 12,
                 );
@@ -38,28 +34,30 @@ class AppNavigator extends StatelessWidget {
             }),
             iconTheme: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.selected)) {
-                return IconThemeData(color: AppColors.secondaryColor, size: 26);
+                return IconThemeData(color: AppColors.primaryColor, size: 26);
               }
               return const IconThemeData(color: Colors.grey, size: 24);
             }),
           ),
+
           child: NavigationBar(
             height: 70,
             backgroundColor: AppColors.white,
             selectedIndex: controller.selectedIndex.value,
-            onDestinationSelected: (index) {
-              controller.changePage(index);
-            },
+
             labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
             destinations: const [
-              NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
+              NavigationDestination(icon: Icon(Iconsax.home5), label: 'Home'),
               NavigationDestination(
-                icon: Icon(Iconsax.star),
+                icon: Icon(Iconsax.video),
                 label: 'Spotlight',
               ),
-              NavigationDestination(icon: Icon(Iconsax.card), label: 'Rewards'),
               NavigationDestination(
-                icon: Icon(Iconsax.receipt),
+                icon: Icon(Iconsax.bag_2),
+                label: 'Rewards',
+              ),
+              NavigationDestination(
+                icon: Icon(Iconsax.ticket),
                 label: 'Orders',
               ),
               NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
@@ -71,10 +69,9 @@ class AppNavigator extends StatelessWidget {
   }
 }
 
-/// ---------------- CONTROLLER ----------------
 class _NavigationController extends GetxController {
   _NavigationController({this.initialIndex = 0}) {
-    selectedIndex.value = initialIndex;
+    selectedIndex.value = 0; // always HOME
   }
 
   final int initialIndex;
@@ -83,13 +80,43 @@ class _NavigationController extends GetxController {
 
   final List<Widget> screens = const [
     HomePage(),
-    SpotlightPage(),
-    RewardsPage(),
-    OrdersPage(),
-    ProfilePage(),
+    _BlockedPage("Spotlight"),
+    _BlockedPage("Rewards"),
+    _BlockedPage("Orders"),
+    _BlockedPage("Profile"),
   ];
+}
 
-  void changePage(int index) {
-    selectedIndex.value = index;
+class _BlockedPage extends StatelessWidget {
+  final String title;
+
+  const _BlockedPage(this.title, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.lock, size: 80, color: Colors.grey),
+            const SizedBox(height: 10),
+            Text(
+              "$title Disabled",
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 5),
+            const Text(
+              "Only Home page is active",
+              style: TextStyle(color: Colors.grey),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

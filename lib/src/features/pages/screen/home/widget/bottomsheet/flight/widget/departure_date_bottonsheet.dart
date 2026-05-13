@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/add_return_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/flight/widget/add_return_bottomsheet.dart';
 import 'package:namari/src/shared/app_button.dart';
 
 // Hubi in path-kan uu sax yahay mashaariicdaada

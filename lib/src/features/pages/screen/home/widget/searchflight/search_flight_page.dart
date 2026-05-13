@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:namari/src/features/pages/screen/home/widget/chooseflight/choose_flight_page.dart';
-import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/filter_bottomsheet.dart';
-import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/sorted_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/searchflight/widget/edit_page_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/searchflight/widget/filter_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/searchflight/widget/sorted_bottomsheet.dart';
 import 'package:namari/src/shared/app_button.dart';
 import 'package:namari/src/utils/constant/colors.dart';
 import 'package:namari/src/utils/constant/images.dart';
@@ -29,7 +30,18 @@ class SearchFlightPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _topIcon(Icons.arrow_back_ios_new),
+                          _topIcon(
+                            context,
+                            Icons.arrow_back_ios_new,
+                            onTap: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => const EditPage(),
+                              //   ),
+                              // );
+                            },
+                          ),
                           const Text(
                             "MGQ → NBO",
                             style: TextStyle(
@@ -37,7 +49,13 @@ class SearchFlightPage extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          _topIcon(Icons.edit),
+                          _topIcon(
+                            context,
+                            Icons.edit,
+                            onTap: () {
+                              EditSearchBottomSheet.show();
+                            },
+                          ),
                         ],
                       ),
 
@@ -220,7 +238,7 @@ class SearchFlightPage extends StatelessWidget {
                                     ),
                                   ),
 
-                                  const SizedBox(width: 12),
+                                  const SizedBox(width: 4),
 
                                   const Expanded(
                                     child: Text(
@@ -485,6 +503,630 @@ class SearchFlightPage extends StatelessWidget {
                           ),
                         ),
                       ),
+
+                      /// Salam
+                      const SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(22),
+                        ),
+
+                        child: Padding(
+                          padding: const EdgeInsets.all(
+                            18,
+                          ), // ✅ ONLY ONE PADDING
+                          child: Column(
+                            crossAxisAlignment:
+                                CrossAxisAlignment.start, // ✅ ADD THIS
+
+                            children: [
+                              /// ================= AIRLINE =================
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(6),
+                                      child: Image.asset(
+                                        AppImages.salam,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+
+                                  const SizedBox(width: 4),
+
+                                  const Expanded(
+                                    child: Text(
+                                      "Salam Air",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+
+                                  const Icon(Icons.more_vert),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "GI 2023",
+                                    style: TextStyle(
+                                      color: Colors.grey.shade600,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF019624),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      "Business",
+                                      style: TextStyle(
+                                        color: AppColors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 18),
+
+                              /// ================= TIME SECTION =================
+                              Row(
+                                children: [
+                                  const Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "06:00",
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        "MGQ",
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                    ],
+                                  ),
+
+                                  const SizedBox(width: 12),
+
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              height: 6,
+                                              width: 6,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.grey,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            ),
+
+                                            Expanded(
+                                              child: Row(
+                                                children: List.generate(10, (
+                                                  index,
+                                                ) {
+                                                  return Expanded(
+                                                    child: Container(
+                                                      height: 1,
+                                                      margin:
+                                                          const EdgeInsets.symmetric(
+                                                            horizontal: 1,
+                                                          ),
+                                                      color: Colors.grey,
+                                                    ),
+                                                  );
+                                                }),
+                                              ),
+                                            ),
+
+                                            const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 6,
+                                              ),
+                                              child: Icon(
+                                                Icons.flight,
+                                                size: 18,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+
+                                            Expanded(
+                                              child: Row(
+                                                children: List.generate(10, (
+                                                  index,
+                                                ) {
+                                                  return Expanded(
+                                                    child: Container(
+                                                      height: 1,
+                                                      margin:
+                                                          const EdgeInsets.symmetric(
+                                                            horizontal: 1,
+                                                          ),
+                                                      color: Colors.grey,
+                                                    ),
+                                                  );
+                                                }),
+                                              ),
+                                            ),
+
+                                            Container(
+                                              height: 6,
+                                              width: 6,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.grey,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        const SizedBox(height: 10),
+
+                                        const Text(
+                                          "1h 40m • Direct",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  const SizedBox(width: 12),
+
+                                  const Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "07:40",
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        "NBO",
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 18),
+
+                              /// ================= PRICE =================
+                              Row(
+                                children: [
+                                  const Text(
+                                    "\$160.00",
+                                    style: TextStyle(
+                                      color: Colors.orange,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+
+                                  const Text(
+                                    " / pax",
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+
+                                  const Spacer(),
+
+                                  Text(
+                                    "USD \$220.00",
+                                    style: TextStyle(
+                                      color: Colors.green,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 18),
+
+                              /// ================= FACILITIES =================
+                              Column(
+                                children: [
+                                  // 1. Xariiqda Kore
+                                  const Divider(
+                                    height: 1,
+                                    thickness: 1,
+                                    color: Color(
+                                      0xFFE8F0F5,
+                                    ), // Midabka khafiifka ah ee sawirka
+                                  ),
+
+                                  // 2. Qaybta Qoraalka iyo Icon-ka
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 12,
+                                    ), // Masaafada u dhexaysa xariiqyada
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text(
+                                          "Facilities",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            // Midabka qoraalka
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.keyboard_arrow_up,
+                                          color: Colors.grey.shade700,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  // 3. Xariiqda Hoose
+                                  const Divider(
+                                    height: 1,
+                                    thickness: 1,
+                                    color: Color(0xFFE8F0F5),
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 18),
+
+                              /// ================= BUTTON =================
+                              SizedBox(
+                                width: double.infinity,
+                                height: 50,
+                                child: AppButton(
+                                  text: "Choose Flight",
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ChooseFlightPage(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      /// Salam
+                      const SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(22),
+                        ),
+
+                        child: Padding(
+                          padding: const EdgeInsets.all(
+                            18,
+                          ), // ✅ ONLY ONE PADDING
+                          child: Column(
+                            crossAxisAlignment:
+                                CrossAxisAlignment.start, // ✅ ADD THIS
+
+                            children: [
+                              /// ================= AIRLINE =================
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(6),
+                                      child: Image.asset(
+                                        AppImages.juba,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+
+                                  const SizedBox(width: 4),
+
+                                  const Expanded(
+                                    child: Text(
+                                      "Jubba Air",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+
+                                  const Icon(Icons.more_vert),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "GI 2023",
+                                    style: TextStyle(
+                                      color: Colors.grey.shade600,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF019624),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      "Business",
+                                      style: TextStyle(
+                                        color: AppColors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 18),
+
+                              /// ================= TIME SECTION =================
+                              Row(
+                                children: [
+                                  const Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "06:00",
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        "MGQ",
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                    ],
+                                  ),
+
+                                  const SizedBox(width: 12),
+
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              height: 6,
+                                              width: 6,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.grey,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            ),
+
+                                            Expanded(
+                                              child: Row(
+                                                children: List.generate(10, (
+                                                  index,
+                                                ) {
+                                                  return Expanded(
+                                                    child: Container(
+                                                      height: 1,
+                                                      margin:
+                                                          const EdgeInsets.symmetric(
+                                                            horizontal: 1,
+                                                          ),
+                                                      color: Colors.grey,
+                                                    ),
+                                                  );
+                                                }),
+                                              ),
+                                            ),
+
+                                            const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 6,
+                                              ),
+                                              child: Icon(
+                                                Icons.flight,
+                                                size: 18,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+
+                                            Expanded(
+                                              child: Row(
+                                                children: List.generate(10, (
+                                                  index,
+                                                ) {
+                                                  return Expanded(
+                                                    child: Container(
+                                                      height: 1,
+                                                      margin:
+                                                          const EdgeInsets.symmetric(
+                                                            horizontal: 1,
+                                                          ),
+                                                      color: Colors.grey,
+                                                    ),
+                                                  );
+                                                }),
+                                              ),
+                                            ),
+
+                                            Container(
+                                              height: 6,
+                                              width: 6,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.grey,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        const SizedBox(height: 10),
+
+                                        const Text(
+                                          "1h 40m • Direct",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  const SizedBox(width: 12),
+
+                                  const Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "07:40",
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        "NBO",
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 18),
+
+                              /// ================= PRICE =================
+                              Row(
+                                children: [
+                                  const Text(
+                                    "\$160.00",
+                                    style: TextStyle(
+                                      color: Colors.orange,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+
+                                  const Text(
+                                    " / pax",
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+
+                                  const Spacer(),
+
+                                  Text(
+                                    "USD \$220.00",
+                                    style: TextStyle(
+                                      color: Colors.green,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 18),
+
+                              /// ================= FACILITIES =================
+                              Column(
+                                children: [
+                                  // 1. Xariiqda Kore
+                                  const Divider(
+                                    height: 1,
+                                    thickness: 1,
+                                    color: Color(
+                                      0xFFE8F0F5,
+                                    ), // Midabka khafiifka ah ee sawirka
+                                  ),
+
+                                  // 2. Qaybta Qoraalka iyo Icon-ka
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 12,
+                                    ), // Masaafada u dhexaysa xariiqyada
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text(
+                                          "Facilities",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            // Midabka qoraalka
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.keyboard_arrow_up,
+                                          color: Colors.grey.shade700,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  // 3. Xariiqda Hoose
+                                  const Divider(
+                                    height: 1,
+                                    thickness: 1,
+                                    color: Color(0xFFE8F0F5),
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 18),
+
+                              /// ================= BUTTON =================
+                              SizedBox(
+                                width: double.infinity,
+                                height: 50,
+                                child: AppButton(
+                                  text: "Choose Flight",
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ChooseFlightPage(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 30),
                     ],
                   ),
@@ -497,16 +1139,17 @@ class SearchFlightPage extends StatelessWidget {
     );
   }
 
-  /// ================= TOP ICON =================
-  Widget _topIcon(IconData icon) {
-    return Container(
-      padding: const EdgeInsets.all(11),
-      decoration: BoxDecoration(
-        // color: Colors.white,
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(14),
+  Widget _topIcon(BuildContext context, IconData icon, {VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(11),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Icon(icon, size: 18),
       ),
-      child: Icon(icon, size: 18),
     );
   }
 

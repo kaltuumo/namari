@@ -13,4 +13,6 @@ class AppImages {
   static const String maandeeq = 'assets/images/maandeeq.png';
   static const String rescheduleImage = 'assets/images/Reschedule_Image.png';
   static const String helpIcon = 'assets/images/Help_Icon.png';
+  static const String salam = 'assets/images/salam.png';
+  static const String juba = 'assets/images/juba.png';
 }

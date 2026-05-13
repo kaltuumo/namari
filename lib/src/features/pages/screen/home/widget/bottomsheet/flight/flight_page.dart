@@ -2,11 +2,11 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/adult_bottomsheet.dart';
-import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/departure_date_bottonsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/flight/widget/adult_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/flight/widget/departure_date_bottonsheet.dart';
 import 'package:namari/src/features/pages/screen/home/widget/searchflight/search_flight_page.dart';
-import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/departure_bottomsheet.dart';
-import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/select_class_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/flight/widget/departure_bottomsheet.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/flight/widget/select_class_bottomsheet.dart';
 import 'package:namari/src/utils/constant/colors.dart';
 import 'package:namari/src/utils/constant/images.dart';
 
@@ -60,7 +60,7 @@ class _FlightBottomSheetState extends State<_FlightBottomSheet> {
               child: Column(
                 children: [
                   Transform.translate(
-                    offset: const Offset(0, -35),
+                    offset: const Offset(0, -55),
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 18),
                       padding: const EdgeInsets.all(18),
@@ -100,12 +100,12 @@ class _FlightBottomSheetState extends State<_FlightBottomSheet> {
   }
 
   // ================= HEADER =================
+  // ================= HEADER =================
   Widget _buildHeader(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-
     return Container(
+      height:
+          320, // 1. Waad kordhin kartaa height-ka guud si uu boos u helo qoraalka hoose
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
       decoration: const BoxDecoration(
         color: AppColors.primaryColor,
         image: DecorationImage(
@@ -113,46 +113,81 @@ class _FlightBottomSheetState extends State<_FlightBottomSheet> {
           fit: BoxFit.cover,
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
+        clipBehavior: Clip.none,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // ================= TOP ROW =================
+                // 2. Height-ka SizedBox-ka kor u qaad (tusaale 100 ama 120) si images-ka u weynaadaan
+                SizedBox(
+                  height: 110,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // BACK BUTTON (Size-kiisa hadda waa 55)
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Container(
+                          height: 45,
+                          width: 45,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_back_ios_new,
+                            size: 20,
+                          ), // Icon kordhi
+                        ),
+                      ),
+
+                      const Spacer(),
+
+                      // LOGO (Width-ga kordhi)
+                      Image.asset(
+                        AppImages.logo,
+                        width: 130, // Hore wuxuu ahaa 95
+                        fit: BoxFit.contain,
+                      ),
+
+                      const Spacer(),
+                      Transform(
+                        alignment: Alignment.center,
+                        transform: Matrix4.identity()
+                          ..rotateY(math.pi)
+                          ..translate(-20.0, 0.0), // bidix u riix 10px
+                        child: Image.asset(
+                          AppImages.splash,
+                          width: 140,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
                   ),
-                  child: const Icon(Icons.arrow_back_ios_new, size: 18),
                 ),
-              ),
-              Image.asset(AppImages.logo, width: 100),
-              Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.rotationY(math.pi),
-                child: Image.asset(AppImages.splash, width: width * 0.2),
-              ),
-            ],
-          ),
 
-          const SizedBox(height: 10),
+                // ================= TITLE =================
+                const Text(
+                  "Flights ticket",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
 
-          const Text(
-            "Flights ticket",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
+                const SizedBox(height: 6),
+
+                const Text(
+                  "Find your best flight ticket for traveling",
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ],
             ),
-          ),
-
-          const Text(
-            "Find your best flight ticket for traveling",
-            style: TextStyle(color: Colors.white, fontSize: 16),
           ),
         ],
       ),

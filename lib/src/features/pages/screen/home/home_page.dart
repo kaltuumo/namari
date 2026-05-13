@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/flight_page.dart';
+import 'package:namari/src/features/pages/screen/home/notification_page.dart';
+import 'package:namari/src/features/pages/screen/home/widget/bottomsheet/flight/flight_page.dart';
 import 'package:namari/src/utils/constant/images.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,7 +14,7 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _headerSection(),
+              _headerSection(context),
               const SizedBox(height: 15),
               _searchBar(),
               const SizedBox(height: 15),
@@ -30,7 +31,7 @@ class HomePage extends StatelessWidget {
   }
 
   // ================= HEADER =================
-  Widget _headerSection() {
+  Widget _headerSection(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
@@ -56,14 +57,35 @@ class HomePage extends StatelessWidget {
 
               Row(
                 children: [
-                  _iconBox(Icons.card_giftcard),
+                  _iconBox(
+                    context,
+                    Icons.card_giftcard,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NotificationPage(),
+                        ),
+                      );
+                    },
+                  ),
 
                   const SizedBox(width: 10),
 
                   Stack(
                     children: [
-                      _iconBox(Icons.notifications),
-
+                      _iconBox(
+                        context,
+                        Icons.notifications,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const NotificationPage(),
+                            ),
+                          );
+                        },
+                      ),
                       Positioned(
                         right: 4,
                         top: 4,
@@ -102,14 +124,17 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _iconBox(IconData icon) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+  Widget _iconBox(BuildContext context, IconData icon, {VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Icon(icon, size: 20),
       ),
-      child: Icon(icon, size: 20),
     );
   }
 
@@ -289,9 +314,10 @@ class HomePage extends StatelessWidget {
 
   Widget _flightCard() {
     return Container(
-      width: 300,
+      height: 10,
+      width: 290,
       margin: const EdgeInsets.only(left: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 9),
 
       decoration: BoxDecoration(
         color: Colors.white,
@@ -350,21 +376,15 @@ class HomePage extends StatelessWidget {
 
             children: const [
               Text("MGQ", style: TextStyle(color: Colors.grey)),
-
+              Text(
+                "1h 30m    • Direct",
+                style: TextStyle(color: Colors.grey, fontSize: 12),
+              ),
               Text("HGA", style: TextStyle(color: Colors.grey)),
             ],
           ),
 
-          const SizedBox(height: 6),
-
-          const Center(
-            child: Text(
-              "1h 30m • Direct",
-              style: TextStyle(color: Colors.grey, fontSize: 12),
-            ),
-          ),
-
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

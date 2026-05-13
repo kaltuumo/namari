@@ -4,6 +4,7 @@ import 'package:namari/src/features/pages/screen/home/widget/chooseflight/widget
 import 'package:namari/src/features/pages/screen/home/widget/chooseflight/widget/price_details.dart';
 import 'package:namari/src/features/pages/screen/home/widget/chooseflight/widget/refund_page.dart';
 import 'package:namari/src/features/pages/screen/home/widget/chooseflight/widget/rescedule_page.dart';
+import 'package:namari/src/features/pages/screen/home/widget/chooseflight/widget/share_bottomsheet.dart';
 
 class ChooseFlightPage extends StatefulWidget {
   const ChooseFlightPage({super.key});
@@ -48,7 +49,12 @@ class _ChooseFlightPageState extends State<ChooseFlightPage> {
                     ],
                   ),
 
-                  _iconButton(Icons.share_outlined),
+                  _iconButton(
+                    Icons.share_outlined,
+                    onTap: () {
+                      ShareBottomSheet.show();
+                    },
+                  ),
                 ],
               ),
             ),
@@ -140,17 +146,19 @@ class _ChooseFlightPageState extends State<ChooseFlightPage> {
     );
   }
 
-  /// ================= ICON =================
-  Widget _iconButton(IconData icon) {
-    return Container(
-      height: 45,
-      width: 45,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.grey.shade300),
-        color: Colors.white,
+  Widget _iconButton(IconData icon, {VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 45,
+        width: 45,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Colors.grey.shade300),
+          color: Colors.white,
+        ),
+        child: Icon(icon),
       ),
-      child: Icon(icon),
     );
   }
 }
