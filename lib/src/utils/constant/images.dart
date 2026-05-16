@@ -2,6 +2,7 @@ class AppImages {
   AppImages._();
   // static const String logo = 'assets/images/logo.png';
   static const String background3 = 'assets/images/background3.png';
+  static const String background = 'assets/images/background.png';
   static const String cloud1 = 'assets/images/cloud1.png';
   static const String splash = 'assets/images/air.png';
   static const String splash2 = 'assets/images/mobile.png';

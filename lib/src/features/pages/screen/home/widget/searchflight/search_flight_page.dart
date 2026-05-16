@@ -33,14 +33,7 @@ class SearchFlightPage extends StatelessWidget {
                           _topIcon(
                             context,
                             Icons.arrow_back_ios_new,
-                            onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => const EditPage(),
-                              //   ),
-                              // );
-                            },
+                            onTap: () => Navigator.pop(context),
                           ),
                           const Text(
                             "MGQ → NBO",
@@ -816,7 +809,7 @@ class SearchFlightPage extends StatelessWidget {
                         ),
                       ),
 
-                      /// Salam
+                      /// Jubba
                       const SizedBox(height: 16),
                       Container(
                         decoration: BoxDecoration(

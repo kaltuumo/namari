@@ -52,7 +52,7 @@ class _ChooseFlightPageState extends State<ChooseFlightPage> {
                   _iconButton(
                     Icons.share_outlined,
                     onTap: () {
-                      ShareBottomSheet.show();
+                      showShareFlightsBottomSheet(context);
                     },
                   ),
                 ],

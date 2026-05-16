@@ -301,7 +301,7 @@ class HomePage extends StatelessWidget {
         const SizedBox(height: 10),
 
         SizedBox(
-          height: 160,
+          height: 150,
 
           child: ListView(
             scrollDirection: Axis.horizontal,

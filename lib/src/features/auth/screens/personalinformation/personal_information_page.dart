@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:namari/src/app_navigator.dart';
 import 'package:namari/src/features/auth/screens/personalinformation/widget/continue_bottomsheet.dart';
-import 'package:namari/src/features/pages/screen/home/home_page.dart';
 import 'package:namari/src/shared/app_button.dart';
 import 'package:namari/src/utils/constant/colors.dart';
 
@@ -249,7 +249,7 @@ class _ProfileInformationPage extends State<ProfileInformationPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const HomePage(),
+                            builder: (context) => const AppNavigator(),
                           ),
                         );
                       },
@@ -276,7 +276,7 @@ class _ProfileInformationPage extends State<ProfileInformationPage> {
                     child: AppButton(
                       text: "Continue",
                       onPressed: () {
-                        ContinueBottomsheet.show(context);
+                        ContinueBottomSheet.show(context);
                       },
                     ),
                   ),

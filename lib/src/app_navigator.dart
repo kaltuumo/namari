@@ -41,7 +41,7 @@ class AppNavigator extends StatelessWidget {
           ),
 
           child: NavigationBar(
-            height: 70,
+            height: 60,
             backgroundColor: AppColors.white,
             selectedIndex: controller.selectedIndex.value,
 

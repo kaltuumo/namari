@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:namari/src/features/pages/screen/home/widget/searchflight/search_flight_page.dart';
 import 'package:namari/src/shared/app_button.dart';
 
 class EditSearchBottomSheet extends StatelessWidget {
@@ -139,12 +140,12 @@ class EditSearchBottomSheet extends StatelessWidget {
             child: AppButton(
               text: "Save",
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const ProfileInformationPage(),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchFlightPage(),
+                  ),
+                );
               },
             ),
           ),

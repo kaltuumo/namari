@@ -63,12 +63,7 @@ void showDepartureBottomSheet(BuildContext context) {
                         icon: Icons.my_location,
                         selected: true,
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const CurrentLocationPage(),
-                            ),
-                          );
+                          showCurrentLocationBottomSheet(context);
                         },
                       ),
                       Padding(

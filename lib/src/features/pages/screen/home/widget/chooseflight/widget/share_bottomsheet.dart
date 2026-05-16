@@ -1,248 +1,356 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:namari/src/shared/app_button.dart';
+import 'package:namari/src/utils/constant/colors.dart';
+import 'package:namari/src/utils/constant/images.dart';
 
+// --- SHOW BOTTOM SHEET ---
+void showShareFlightsBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    builder: (context) => const ShareBottomSheet(),
+  );
+}
+
+// --- MAIN WIDGET ---
 class ShareBottomSheet extends StatelessWidget {
   const ShareBottomSheet({super.key});
 
-  static void show() {
-    Get.bottomSheet(
-      const ShareBottomSheet(),
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Container(
-      padding: const EdgeInsets.all(20),
+      width: double.infinity,
       decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+        color: Color(0xFFF8FAFC),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Header
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Share flights",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              GestureDetector(
-                onTap: () => Get.back(),
-                child: CircleAvatar(
-                  backgroundColor: Colors.grey.shade100,
-                  radius: 18,
-                  child: const Icon(Icons.close, size: 20, color: Colors.black),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 25),
-
-          // THE TICKET CARD
-          _buildActualTicket(),
-
-          const SizedBox(height: 30),
-
-          // Social Icons Grid
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _socialButton("Whatsapp", Icons.whatshot, Colors.green),
-              _socialButton("Instagram", Icons.camera_alt, Colors.pink),
-              _socialButton("Facebook", Icons.facebook, Colors.blue),
-              _socialButton("X (Twitter)", Icons.close, Colors.black),
-              _socialButton("Telegram", Icons.send, Colors.blueAccent),
-            ],
-          ),
-          const SizedBox(height: 30),
-
-          // Copy Link Button
-          SizedBox(
-            width: double.infinity,
-            height: 60,
-            child: OutlinedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Iconsax.copy, color: Colors.black),
-              label: const Text(
-                "Copy link",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: Colors.grey.shade200),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildActualTicket() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.shade100),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 15),
-        ],
-      ),
-      child: Stack(
-        children: [
+          // HEADER
           Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Airline Header
-                Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 15,
-                      backgroundColor: Colors.blue,
-                      child: Icon(
-                        Icons.airplanemode_active,
-                        size: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    const Text(
-                      "Maandeeq Air",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    const Text("GI 2023", style: TextStyle(color: Colors.grey)),
-                    const SizedBox(width: 10),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Text(
-                        "Business",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 30),
-
-                // Flight Details with Dotted Line
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _flightInfo("06:00", "MGQ"),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            CustomPaint(
-                              size: const Size(double.infinity, 1),
-                              painter: DashedLinePainter(),
-                            ),
-                            const Icon(
-                              Icons.airplanemode_active,
-                              color: Colors.grey,
-                              size: 20,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    _flightInfo("07:40", "NBO"),
-                  ],
-                ),
-                const SizedBox(height: 10),
                 const Text(
-                  "1h 40m  •  Direct",
-                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                  "Share flights",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1E293B),
+                  ),
                 ),
-                const SizedBox(height: 30),
-
-                // Pricing Row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    RichText(
-                      text: const TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "\$160.00",
-                            style: TextStyle(
-                              color: Colors.orange,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          TextSpan(
-                            text: " / pax",
-                            style: TextStyle(color: Colors.grey, fontSize: 14),
-                          ),
-                        ],
-                      ),
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      shape: BoxShape.circle,
                     ),
-                    const Text(
-                      "USD \$220.00",
-                      style: TextStyle(
-                        color: Colors.green,
-                        decoration: TextDecoration.lineThrough,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+                    child: const Icon(Icons.close, size: 20),
+                  ),
                 ),
               ],
             ),
           ),
-          // Blue Logo Badge
-          Positioned(
-            top: 20,
-            right: 20,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.blue.shade700,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blue.withOpacity(0.3),
-                    blurRadius: 10,
+
+          const Divider(height: 1, color: Color(0xFFE2E8F0)),
+          const SizedBox(height: 20),
+
+          _buildFlightTicketCard(width),
+
+          const SizedBox(height: 24),
+
+          _buildSocialMediaSection(),
+
+          const SizedBox(height: 24),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: SizedBox(
+              width: double.infinity,
+              height: 54,
+              child: OutlinedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Iconsax.copy),
+                label: const Text("Copy link"),
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  side: BorderSide(color: Colors.grey.shade300),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
                   ),
+                ),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 30),
+        ],
+      ),
+    );
+  }
+
+  // ---------------- FLIGHT CARD (HAGAAGSAN) ----------------
+  Widget _buildFlightTicketCard(double width) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          const SizedBox(height: 16),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(22),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+
+            child: Padding(
+              padding: const EdgeInsets.all(18), // ✅ ONLY ONE PADDING
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start, // ✅ ADD THIS
+
+                children: [
+                  /// ================= AIRLINE =================
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundColor: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: Image.asset(
+                            AppImages.maandeeq,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(width: 4),
+
+                      const Expanded(
+                        child: Text(
+                          "Mandeq Air",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+
+                      const Icon(Icons.more_vert),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "GI 2023",
+                        style: TextStyle(color: Colors.grey.shade600),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF019624),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          "Business",
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 18),
+
+                  /// ================= TIME SECTION =================
+                  Row(
+                    children: [
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "06:00",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text("MGQ", style: TextStyle(color: Colors.grey)),
+                        ],
+                      ),
+
+                      const SizedBox(width: 12),
+
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  height: 6,
+                                  width: 6,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.grey,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+
+                                Expanded(
+                                  child: Row(
+                                    children: List.generate(10, (index) {
+                                      return Expanded(
+                                        child: Container(
+                                          height: 1,
+                                          margin: const EdgeInsets.symmetric(
+                                            horizontal: 1,
+                                          ),
+                                          color: Colors.grey,
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                ),
+
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 6),
+                                  child: Icon(
+                                    Icons.flight,
+                                    size: 18,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+
+                                Expanded(
+                                  child: Row(
+                                    children: List.generate(10, (index) {
+                                      return Expanded(
+                                        child: Container(
+                                          height: 1,
+                                          margin: const EdgeInsets.symmetric(
+                                            horizontal: 1,
+                                          ),
+                                          color: Colors.grey,
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                ),
+
+                                Container(
+                                  height: 6,
+                                  width: 6,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.grey,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 10),
+
+                            const Text(
+                              "1h 40m • Direct",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(width: 12),
+
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            "07:40",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text("NBO", style: TextStyle(color: Colors.grey)),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 18),
+
+                  /// ================= PRICE =================
+                  Row(
+                    children: [
+                      const Text(
+                        "\$160.00",
+                        style: TextStyle(
+                          color: Colors.orange,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                      const Text(
+                        " / pax",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+
+                      const Spacer(),
+
+                      Text(
+                        "USD \$220.00",
+                        style: TextStyle(
+                          color: Colors.green,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 18),
                 ],
               ),
-              child: const Icon(Icons.flash_on, color: Colors.white),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            right: 25,
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: const BoxDecoration(
+                color: Color(0xFF2563EB),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(12),
+                  bottomRight: Radius.circular(12),
+                ),
+              ),
+              child: const Icon(Iconsax.send_2, color: Colors.white),
             ),
           ),
         ],
@@ -250,18 +358,27 @@ class ShareBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget _flightInfo(String time, String code) {
+  // WIDGET-KA WAQTIGA OO LA CASRIYEEYAY
+  Widget _buildTime(String time, String code, CrossAxisAlignment alignment) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment:
+          alignment, // Bidix ama Midig u jiciir xogta si ay u dhegto geeska
       children: [
         Text(
           time,
-          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            height: 1.1,
+          ),
         ),
+        const SizedBox(height: 2),
         Text(
           code,
           style: const TextStyle(
             color: Colors.grey,
-            fontSize: 16,
+            fontSize: 13,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -269,41 +386,67 @@ class ShareBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget _socialButton(String label, IconData icon, Color color) {
+  // Widget _buildDashedLine() {
+  //   return LayoutBuilder(
+  //     builder: (context, constraints) {
+  //       return Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: List.generate(
+  //           (constraints.maxWidth / 6).floor(),
+  //           (_) => Container(
+  //             width: 3,
+  //             height: 3,
+  //             decoration: const BoxDecoration(
+  //               color: Color(0xFF94A3B8),
+  //               shape: BoxShape.circle,
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+  // --- SOCIAL MEDIA SECTION ---
+  Widget _buildSocialMediaSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildSocialItem("WhatsApp", Icons.message, Colors.green),
+          _buildSocialItem("Instagram", Icons.camera_alt, Colors.pink),
+          _buildSocialItem("Facebook", Icons.facebook, Colors.blue),
+          _buildSocialItem("X", Icons.close, Colors.black),
+          _buildSocialItem("Telegram", Icons.telegram, Colors.blue),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSocialItem(String label, IconData icon, Color iconColor) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: const EdgeInsets.all(15),
+          width: 56,
+          height: 56,
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
             border: Border.all(color: Colors.grey.shade200),
-            borderRadius: BorderRadius.circular(15),
           ),
-          child: Icon(icon, color: color, size: 28),
+          child: Center(child: Icon(icon, color: iconColor, size: 24)),
         ),
         const SizedBox(height: 8),
         Text(
           label,
-          style: const TextStyle(fontSize: 11, color: Colors.blueGrey),
+          style: const TextStyle(
+            fontSize: 12,
+            color: Color(0xFF64748B),
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ],
     );
   }
-}
-
-// Xariiqda dhibicda ah (Dashed Line)
-class DashedLinePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    double dashWidth = 5, dashSpace = 5, startX = 0;
-    final paint = Paint()
-      ..color = Colors.grey.shade300
-      ..strokeWidth = 2;
-    while (startX < size.width) {
-      canvas.drawLine(Offset(startX, 0), Offset(startX + dashWidth, 0), paint);
-      startX += dashWidth + dashSpace;
-    }
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
