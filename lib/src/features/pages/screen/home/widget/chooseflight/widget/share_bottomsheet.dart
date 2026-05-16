@@ -356,33 +356,33 @@ class ShareBottomSheet extends StatelessWidget {
     );
   }
 
-  // WIDGET-KA WAQTIGA OO LA CASRIYEEYAY
-  Widget _buildTime(String time, String code, CrossAxisAlignment alignment) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment:
-          alignment, // Bidix ama Midig u jiciir xogta si ay u dhegto geeska
-      children: [
-        Text(
-          time,
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            height: 1.1,
-          ),
-        ),
-        const SizedBox(height: 2),
-        Text(
-          code,
-          style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
-    );
-  }
+  // // WIDGET-KA WAQTIGA OO LA CASRIYEEYAY
+  // Widget _buildTime(String time, String code, CrossAxisAlignment alignment) {
+  //   return Column(
+  //     mainAxisSize: MainAxisSize.min,
+  //     crossAxisAlignment:
+  //         alignment, // Bidix ama Midig u jiciir xogta si ay u dhegto geeska
+  //     children: [
+  //       Text(
+  //         time,
+  //         style: const TextStyle(
+  //           fontSize: 22,
+  //           fontWeight: FontWeight.bold,
+  //           height: 1.1,
+  //         ),
+  //       ),
+  //       const SizedBox(height: 2),
+  //       Text(
+  //         code,
+  //         style: const TextStyle(
+  //           color: Colors.grey,
+  //           fontSize: 13,
+  //           fontWeight: FontWeight.w500,
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   // Widget _buildDashedLine() {
   //   return LayoutBuilder(
