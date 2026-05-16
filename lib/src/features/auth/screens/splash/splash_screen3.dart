@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:namari/src/features/auth/screens/getstart/get_start.dart';
-import 'package:namari/src/features/auth/screens/otp/otp_page.dart';
+
 import 'package:namari/src/features/auth/screens/signin/signin_page.dart';
-import 'package:namari/src/features/auth/screens/splash/splash_screen2.dart';
 import 'package:namari/src/shared/app_button.dart';
 import 'package:namari/src/utils/constant/images.dart';
 
